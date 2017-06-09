@@ -82,7 +82,7 @@ public class RetrofitClient {
             clientBuilder.addInterceptor(new CookieInterceptor());
         }
 
-        //Https证书验证
+        //Https 证书验证，是 Https 话将忽略 Https 验证
         if (host != null && (host.startsWith("https") || host.startsWith("HTTPS"))) {
             supportHttps(clientBuilder);
         }

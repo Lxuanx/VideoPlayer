@@ -18,13 +18,11 @@ public class NetWorkTypeUtils {
     public static NetworkInfo getAvailableNetWorkInfo(Context context) {
 
         try {
-
             ConnectivityManager connectivityManager =
                     (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo activeNetInfo = connectivityManager.getActiveNetworkInfo();
             if (activeNetInfo != null && activeNetInfo.isAvailable()) {
                 return activeNetInfo;
-
             } else {
                 return null;
             }
@@ -38,6 +36,7 @@ public class NetWorkTypeUtils {
 
     /**
      * 是否有可用网络
+     *
      * @param context
      * @return
      */
@@ -93,11 +92,9 @@ public class NetWorkTypeUtils {
                     case NETWORK_TYPE_HSPAP:
                         netWorkType = "12";
                         break;
-
                     case TelephonyManager.NETWORK_TYPE_LTE:
                         netWorkType = "14";
                         break;
-
                     default:
                         netWorkType = "-1";
                 }

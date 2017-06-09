@@ -16,7 +16,7 @@ public class ApiClient {
 
     private static Map<String, ApiService> apiServiceMap = new HashMap<>();
     /**
-     * 获取ApiService对象，避免重复创建，static缓存起来
+     * 获取ApiService对象，避免重复创建，static 缓存起来
      * @param host
      * @return
      */

@@ -16,7 +16,7 @@ public class ApiConstant {
     public final static String APP_V = "8.2";
 
     /**
-     * 客户端类型,固定为'0'
+     * 客户端类型，固定为'0'
      */
     public final static String APP_T = "0";
 
