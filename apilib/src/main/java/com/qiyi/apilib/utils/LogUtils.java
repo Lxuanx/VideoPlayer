@@ -5,9 +5,6 @@ import android.util.Log;
 import com.qiyi.apilib.ApiConstant;
 
 
-/**
- * Created by zhouxiaming on 2015/5/5.
- */
 
 public class LogUtils {
     private static String TAG = "LogUtils";

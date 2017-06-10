@@ -8,13 +8,11 @@ import com.qiyi.apilib.utils.NetWorkTypeUtils;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by zhouxiaming on 2017/5/5.
- */
 public class ApiParamsGen {
 
     /**
      * 构建Open API通用参数
+     *
      * @return
      */
     public static Map<String, String> genCommonParams() {
@@ -42,6 +40,7 @@ public class ApiParamsGen {
 
     /**
      * 构建获取频道列表的参数
+     *
      * @return
      */
     public static Map<String, String> genChannelParams() {
@@ -52,10 +51,11 @@ public class ApiParamsGen {
 
     /**
      * 获取频道详情信息参数
-     * @param channelId 频道ID
+     *
+     * @param channelId   频道ID
      * @param channelName 频道名称
-     * @param pageIndex 分页码
-     * @param pageSize 每页数据条数
+     * @param pageIndex   分页码
+     * @param pageSize    每页数据条数
      * @return
      */
     public static Map<String, String> genChannelDetailParams(String channelId, String channelName, int pageIndex, int pageSize) {
@@ -82,7 +82,7 @@ public class ApiParamsGen {
          * 1：付费未划价(是付费片子，但是还没有定价，这样状态的片子还不允许上线)
          * 2：付费已划价(判断是否会员视频，直接判断is_purchase=2即可)
          */
-       // params.put("is_purchase", "2");
+        // params.put("is_purchase", "2");
 
         /**
          * 1： 仅要付费点播的结果
@@ -102,6 +102,7 @@ public class ApiParamsGen {
 
     /**
      * 构建推荐页参数
+     *
      * @param pageIndex
      * @param pageSize
      * @return

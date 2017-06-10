@@ -12,9 +12,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * Created by zhouxiaming on 2017/5/8.
- */
 
 public class RecommendPresenter implements RecommendContract.IPresenter {
     private String TAG = this.getClass().getSimpleName();

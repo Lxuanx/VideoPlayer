@@ -7,7 +7,6 @@ import java.util.List;
 
 /**
  * 频道详情页面，包括Video信息， TAG信息等
- * Created by zhouxiaming on 2017/5/5.
  */
 
 public class ChannelDetailEntity extends BaseEntity {

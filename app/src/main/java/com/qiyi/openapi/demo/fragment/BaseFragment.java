@@ -21,9 +21,6 @@ import com.qiyi.apilib.utils.LogUtils;
 import com.qiyi.openapi.demo.R;
 import com.qiyi.openapi.demo.activity.BaseActivity;
 
-/**
- * Created by zhouxiaming on 17/5/5.
- */
 public abstract class BaseFragment extends Fragment {
     protected String TAG = this.getClass().getSimpleName();
     protected static final String ARG_PARAM1 = "param1";
@@ -35,6 +32,7 @@ public abstract class BaseFragment extends Fragment {
     private HandlerThread mWorkThread;
     private Handler mWorkHandler;
     protected ProgressBar mLoadingView;
+
     public BaseFragment() {
         // Required empty public constructor
     }
@@ -63,6 +61,7 @@ public abstract class BaseFragment extends Fragment {
     }
 
     protected abstract int getLayoutResourceId();
+
     protected void initView() {
         View mProgressBar = mRootView.findViewById(R.id.loading_bar);
         if (mProgressBar != null) {
@@ -70,6 +69,7 @@ public abstract class BaseFragment extends Fragment {
         }
 
     }
+
     protected void loadData() {
 
     }
@@ -85,7 +85,6 @@ public abstract class BaseFragment extends Fragment {
             mLoadingView.setVisibility(View.GONE);
         }
     }
-
 
 
     protected Handler getWorkHandler() {
@@ -119,10 +118,9 @@ public abstract class BaseFragment extends Fragment {
         }
     }
 
-    protected void setActionBar(Toolbar paramToolbar)
-    {
+    protected void setActionBar(Toolbar paramToolbar) {
         if (mActivity instanceof BaseActivity) {
-            BaseActivity localMainActivity = (BaseActivity)mActivity;
+            BaseActivity localMainActivity = (BaseActivity) mActivity;
             localMainActivity.setSupportActionBar(paramToolbar);
         }
     }
@@ -157,7 +155,6 @@ public abstract class BaseFragment extends Fragment {
         super.onResume();
         LogUtils.i(TAG, "onResume  ========  ");
     }
-
 
     public boolean checkPermission(@NonNull String permission) {
         return ActivityCompat.checkSelfPermission(mActivity, permission) == PackageManager.PERMISSION_GRANTED;

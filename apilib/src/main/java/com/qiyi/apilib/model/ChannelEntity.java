@@ -7,7 +7,6 @@ import java.util.List;
 
 /**
  * Entity 实体对象都是针对服务器返回数据进行序列号而定义的，包含返回码等信息，方便反序列化
- * Created by zhouxiaming on 2017/5/5.
  */
 
 public class ChannelEntity extends BaseEntity {
@@ -18,7 +17,6 @@ public class ChannelEntity extends BaseEntity {
      * 频道信息
      * Created by zhouxiaming on 2017/5/5.
      */
-
     public static class Channel extends BaseEntity{
         public Channel(){
 

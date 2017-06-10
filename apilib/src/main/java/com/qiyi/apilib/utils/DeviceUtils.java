@@ -21,9 +21,6 @@ import java.security.NoSuchAlgorithmException;
 
 import static android.content.Context.TELEPHONY_SERVICE;
 
-/**
- * Created by zhouxiaming on 2017/4/18.
- */
 
 public class DeviceUtils {
     private static String TAG = "DeviceUtils";

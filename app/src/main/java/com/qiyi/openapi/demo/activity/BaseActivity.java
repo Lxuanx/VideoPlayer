@@ -9,9 +9,6 @@ import android.widget.ProgressBar;
 
 import com.qiyi.openapi.demo.R;
 
-/**
- * Created by zhouxiaming on 2017/5/5.
- */
 
 public abstract class BaseActivity extends AppCompatActivity {
     protected View mRootView;

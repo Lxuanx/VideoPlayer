@@ -1,8 +1,5 @@
 package com.qiyi.apilib;
 
-/**
- * Created by zhouxiaming on 16/5/5.
- */
 public class ApiConstant {
     public final static boolean IS_DEBUG = true;
     /**

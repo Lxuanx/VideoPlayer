@@ -18,7 +18,7 @@ import com.qiyi.apilib.model.VideoInfo;
 import com.qiyi.apilib.utils.ImageUtils;
 import com.qiyi.apilib.utils.StringUtils;
 import com.qiyi.apilib.utils.UiUtils;
-import com.qiyi.openapi.demo.QYPlayerUtils;
+import com.qiyi.openapi.demo.utils.QYPlayerUtils;
 import com.qiyi.openapi.demo.R;
 import com.qiyi.openapi.demo.view.CycleBanner;
 import com.squareup.picasso.Picasso;
@@ -26,9 +26,6 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by zhouxiaming on 15/5/8.
- */
 public class RecommendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public static int ROW_NUM = 3;
     private int TYPE_FOCUS = 0x001;
@@ -39,8 +36,9 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private int[] screen;
     Activity context;
 
-    private List<BaseEntity> entityList = new ArrayList<BaseEntity>();
-    public RecommendAdapter(Activity context){
+    private List<BaseEntity> entityList = new ArrayList<>();
+
+    public RecommendAdapter(Activity context) {
         this.context = context;
         screen = UiUtils.getScreenWidthAndHeight(context);
     }
@@ -84,7 +82,7 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             if ("25".equals(channel.id)) {
                 reAssembleNewsItem(channel, entityList, recommendItem.videoInfoList);
             } else {
-                int needDeleteCount = recommendItem.videoInfoList.size() % ROW_NUM; //根据每一行的item数取余，不能一行显示的就删掉
+                int needDeleteCount = recommendItem.videoInfoList.size() % ROW_NUM; //根据每一行的 item 数取余，不能一行显示的就删掉
                 for (int i = 0; i < recommendItem.videoInfoList.size() - needDeleteCount; i++) {
                     //当前频道下面的视频信息
                     entityList.add(recommendItem.videoInfoList.get(i));
@@ -95,7 +93,7 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private void reAssembleNewsItem(ChannelEntity.Channel channel, List<BaseEntity> entities, List<VideoInfo> videoInfoList) {
         //只显示4条数据
-        for (int i = 0; i < 4; i+=2) {
+        for (int i = 0; i < 4; i += 2) {
             NewsItem item = new NewsItem();
             for (int j = 0; j < NewsItem.ROW_NUM; j++) {
                 item.addVideo(videoInfoList.get(i + j));
@@ -103,8 +101,6 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             entities.add(item);
         }
     }
-
-
 
 
     @Override
@@ -151,6 +147,7 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     /**
      * 判断是否需要占用整行
+     *
      * @param position
      */
     private boolean needTakeOneRow(int position) {
@@ -163,14 +160,13 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     /**
-     *
      * @param recyclerView
      */
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
         RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
-        if (manager instanceof GridLayoutManager) {   // 布局是GridLayoutManager所管理
+        if (manager instanceof GridLayoutManager) {   // 布局是 GridLayoutManager 所管理
             final GridLayoutManager gridLayoutManager = (GridLayoutManager) manager;
             gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                 @Override
@@ -188,7 +184,7 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             super(view);
         }
 
-       abstract void setData(int position);
+        abstract void setData(int position);
 
     }
 
@@ -197,6 +193,7 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
      */
     class FocusViewHolder extends BaseViewHolder {
         CycleBanner mCycleBanner;
+
         public FocusViewHolder(View itemView) {
             super(itemView);
             mCycleBanner = new CycleBanner(context, itemView);
@@ -214,6 +211,7 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
      */
     class ChannelInfoViewHolder extends BaseViewHolder {
         TextView channelNameView;
+
         public ChannelInfoViewHolder(View itemView) {
             super(itemView);
             channelNameView = (TextView) itemView.findViewById(R.id.channel_name);
@@ -221,12 +219,15 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @Override
         void setData(int position) {
-            ChannelEntity.Channel channel = (ChannelEntity.Channel)entityList.get(position);
+            ChannelEntity.Channel channel = (ChannelEntity.Channel) entityList.get(position);
             channelNameView.setText(channel.name);
         }
     }
 
-    class VideoInfoViewHolder extends BaseViewHolder implements View.OnClickListener{
+    /**
+     * 视频的ViewHolder
+     */
+    class VideoInfoViewHolder extends BaseViewHolder implements View.OnClickListener {
         ImageView cover;
         TextView name;
         TextView playCount;
@@ -244,12 +245,13 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         /**
          * 视频图片为竖图展示取分辨率为：_120_160
+         *
          * @param cover
          */
         private void resizeImageView(ImageView cover) {
             int screenWidth = context.getResources().getDisplayMetrics().widthPixels;
-            int coverWidth = (screenWidth - context.getResources().getDimensionPixelSize(R.dimen.video_card_margin_margin_horizontal)*2*4) / 3;
-            int coverHeight = (int)(160.0f / 120.0f * coverWidth);
+            int coverWidth = (screenWidth - context.getResources().getDimensionPixelSize(R.dimen.video_card_margin_margin_horizontal) * 2 * 4) / 3;
+            int coverHeight = (int) (160.0f / 120.0f * coverWidth);
             cover.setMinimumHeight(coverHeight);
             cover.setMaxHeight(coverHeight);
             cover.setMaxHeight(coverWidth);
@@ -261,8 +263,8 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             cover.setLayoutParams(lp);
         }
 
-        public void setData(int position){
-            VideoInfo video = (VideoInfo)entityList.get(position);
+        public void setData(int position) {
+            VideoInfo video = (VideoInfo) entityList.get(position);
             if (!StringUtils.isEmpty(video.shortTitle)) {
                 name.setText(video.shortTitle);
             } else {
@@ -286,23 +288,25 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 //            Glide.with(ApiLib.CONTEXT).load(ImageUtils.getRegImage(video.img, ImageUtils.IMG_260_360)).animate(R.anim.alpha_on).into(cover);
 
         }
+
         @Override
         public void onClick(View view) {
             int position = getAdapterPosition();
             BaseEntity dataObj = entityList.get(position);
             if (dataObj instanceof VideoInfo) {
-                VideoInfo videoInfo = (VideoInfo)dataObj;
+                VideoInfo videoInfo = (VideoInfo) dataObj;
                 QYPlayerUtils.jumpToPlayerActivity(context, videoInfo.aId, videoInfo.tId);
             }
         }
     }
 
-    class NewsViewHolder extends BaseViewHolder implements View.OnClickListener{
+    class NewsViewHolder extends BaseViewHolder implements View.OnClickListener {
         ImageView cover1, cover2;
         TextView name1, name2;
         TextView playCount1, playCount2;
         TextView snsScore1, snsScore2;
         View item1View, item2View;
+
         public NewsViewHolder(View itemView) {
             super(itemView);
             item1View = itemView.findViewById(R.id.item1);
@@ -323,12 +327,13 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         /**
          * 资讯图片为横图展示取分辨率为：_480_270
+         *
          * @param cover
          */
         private void resizeImageView(ImageView cover) {
             int screenWidth = context.getResources().getDisplayMetrics().widthPixels;
-            int coverWidth = (screenWidth - context.getResources().getDimensionPixelSize(R.dimen.video_card_margin_margin_horizontal)*2*3) / 2;
-            int coverHeight = (int)(270.0f / 480.0f * coverWidth);
+            int coverWidth = (screenWidth - context.getResources().getDimensionPixelSize(R.dimen.video_card_margin_margin_horizontal) * 2 * 3) / 2;
+            int coverHeight = (int) (270.0f / 480.0f * coverWidth);
             cover.setMinimumHeight(coverHeight);
             cover.setMaxHeight(coverHeight);
             cover.setMaxHeight(coverWidth);
@@ -367,14 +372,14 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         @Override
         void setData(int position) {
-            NewsItem item = (NewsItem)entityList.get(position);
+            NewsItem item = (NewsItem) entityList.get(position);
             setItemData(item1View, cover1, name1, snsScore1, playCount1, item.videoInfos.get(0));
             setItemData(item2View, cover2, name2, snsScore2, playCount2, item.videoInfos.get(1));
         }
 
         @Override
         public void onClick(View v) {
-            VideoInfo videoInfo = (VideoInfo)v.getTag(R.id.tag_key);
+            VideoInfo videoInfo = (VideoInfo) v.getTag(R.id.tag_key);
             QYPlayerUtils.jumpToPlayerActivity(context, videoInfo.aId, videoInfo.tId);
         }
     }
@@ -385,7 +390,8 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     static class NewsItem extends BaseEntity {
         public static int ROW_NUM = 2;
         public ChannelEntity.Channel channel;
-        public List<VideoInfo> videoInfos = new ArrayList<VideoInfo>();
+        public List<VideoInfo> videoInfos = new ArrayList<>();
+
         public void addVideo(VideoInfo videoInfo) {
             videoInfos.add(videoInfo);
         }

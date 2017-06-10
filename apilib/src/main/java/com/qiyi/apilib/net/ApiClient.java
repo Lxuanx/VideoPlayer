@@ -8,15 +8,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-/**
- * Created by zhouxiaming on 2017/5/5.
- */
-
 public class ApiClient {
 
     private static Map<String, ApiService> apiServiceMap = new HashMap<>();
+
     /**
      * 获取ApiService对象，避免重复创建，static 缓存起来
+     *
      * @param host
      * @return
      */

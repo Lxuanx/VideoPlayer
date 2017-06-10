@@ -15,7 +15,7 @@ import android.widget.RelativeLayout;
 
 import com.qiyi.apilib.ApiLib;
 import com.qiyi.apilib.model.VideoInfo;
-import com.qiyi.openapi.demo.QYPlayerUtils;
+import com.qiyi.openapi.demo.utils.QYPlayerUtils;
 import com.qiyi.openapi.demo.R;
 import com.squareup.picasso.Picasso;
 
@@ -27,15 +27,12 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by AdamLi on 2016/5/30.
- */
 public class CycleBanner {
     ViewPager mViewPager;
     LinearLayout mIndicatorContainer;
     LayoutInflater mLayoutInflater;
     CyclePagerAdapter mPagerAdapter;
-    Stack<View> stackView = new Stack<View>();
+    Stack<View> stackView = new Stack<>();
     List<VideoInfo> mData = new ArrayList<>();
     List<ImageView> mIndicators = new ArrayList<>();
     private int mCount = 0;
@@ -63,8 +60,8 @@ public class CycleBanner {
      */
     private void calculateViewPageSize() {
         int screenWidth = ApiLib.CONTEXT.getResources().getDisplayMetrics().widthPixels - ApiLib.CONTEXT.getResources().getDimensionPixelSize(R.dimen.video_card_margin_margin_horizontal) * 2 * 2;
-        int viewPagerHeight = (int)((float)316.0f / (float) 640 * screenWidth);
-        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)mViewPager.getLayoutParams();
+        int viewPagerHeight = (int) (316.0f / (float) 640 * screenWidth);
+        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mViewPager.getLayoutParams();
         layoutParams.height = viewPagerHeight;
         mViewPager.setLayoutParams(layoutParams);
 
@@ -79,7 +76,7 @@ public class CycleBanner {
         mData.clear();
         mData.addAll(data);
         int count = data.size();
-        if(count != mCount) {
+        if (count != mCount) {
             mCount = count;
             initIndicators();
             mViewPager.setCurrentItem(200 * mCount);
@@ -113,7 +110,7 @@ public class CycleBanner {
         return (int) (dpValue * scale + 0.5f);
     }
 
-    private class CyclePagerAdapter extends PagerAdapter implements View.OnClickListener{
+    private class CyclePagerAdapter extends PagerAdapter implements View.OnClickListener {
 
         @Override
         public int getCount() {
@@ -128,7 +125,7 @@ public class CycleBanner {
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
             container.removeView((View) object);
-            stackView.push((View)object);
+            stackView.push((View) object);
         }
 
         @Override
@@ -158,11 +155,11 @@ public class CycleBanner {
         @Override
         public void onClick(View v) {
             Context context = mWeakContext.get();
-            if(null == context || ((Activity)context).isFinishing()){
+            if (null == context || ((Activity) context).isFinishing()) {
                 stop();
                 return;
             }
-            VideoInfo videoInfo = (VideoInfo)v.getTag(R.id.tag_key);
+            VideoInfo videoInfo = (VideoInfo) v.getTag(R.id.tag_key);
             QYPlayerUtils.jumpToPlayerActivity(context, videoInfo.aId, videoInfo.tId);
         }
     }
@@ -196,24 +193,24 @@ public class CycleBanner {
         }
     };
 
-    private void setIndicator(int pos){
-        int realPos = pos %mCount;
-        for(int i=0;i<mCount;i++){
-            if(realPos == i){
+    private void setIndicator(int pos) {
+        int realPos = pos % mCount;
+        for (int i = 0; i < mCount; i++) {
+            if (realPos == i) {
                 mIndicators.get(i).setBackgroundResource(R.drawable.circle_dot_focus);
-            }else{
+            } else {
                 mIndicators.get(i).setBackgroundResource(R.drawable.circle_dot_normal);
             }
         }
     }
 
-    private void start(){
-        if(null == mScheduledExecutorService || mScheduledExecutorService.isShutdown()){
+    private void start() {
+        if (null == mScheduledExecutorService || mScheduledExecutorService.isShutdown()) {
             mScheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
             mScheduledExecutorService.scheduleAtFixedRate(new Runnable() {
                 @Override
                 public void run() {
-                    if(mCanAutoCycle) {
+                    if (mCanAutoCycle) {
                         mCurrentPos = mCurrentPos + 1;
                         mUIHandler.sendEmptyMessage(0);
                     }
@@ -222,18 +219,18 @@ public class CycleBanner {
         }
     }
 
-    private void stop(){
-        if(mScheduledExecutorService != null){
+    private void stop() {
+        if (mScheduledExecutorService != null) {
             mScheduledExecutorService.shutdown();
         }
     }
 
-    private Handler mUIHandler = new Handler(){
+    private Handler mUIHandler = new Handler() {
 
         @Override
         public void handleMessage(Message msg) {
             Context context = mWeakContext.get();
-            if(null == context || ((Activity)context).isFinishing()){
+            if (null == context || ((Activity) context).isFinishing()) {
                 stop();
                 return;
             }

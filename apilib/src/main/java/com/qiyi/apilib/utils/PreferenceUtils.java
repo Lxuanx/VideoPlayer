@@ -3,9 +3,6 @@ package com.qiyi.apilib.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-/**
- * Created by zhouxiaming on 2017/5/5.
- */
 
 public class PreferenceUtils {
     private String API_CONFIG_NAME = "api_config_name";

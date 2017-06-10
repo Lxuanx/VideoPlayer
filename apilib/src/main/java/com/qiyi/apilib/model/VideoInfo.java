@@ -2,9 +2,6 @@ package com.qiyi.apilib.model;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by zhouxiaming on 2017/5/5.
- */
 
 public class VideoInfo extends BaseEntity {
     //视频ID

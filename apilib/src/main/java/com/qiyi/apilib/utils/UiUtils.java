@@ -3,9 +3,6 @@ package com.qiyi.apilib.utils;
 import android.app.Activity;
 import android.util.DisplayMetrics;
 
-/**
- * Created by zhouxiaming on 2017/5/5.
- */
 
 public class UiUtils {
     /**

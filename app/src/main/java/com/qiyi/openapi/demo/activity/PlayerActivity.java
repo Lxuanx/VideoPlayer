@@ -18,9 +18,6 @@ import com.qiyi.video.playcore.QiyiVideoView;
 
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by zhouxiaming on 2017/5/9.
- */
 
 public class PlayerActivity extends BaseActivity {
     private static final int PERMISSION_REQUEST_CODE = 7171;
@@ -34,6 +31,7 @@ public class PlayerActivity extends BaseActivity {
     private Button mPlayPauseBtn;
     private TextView mCurrentTime;
     private TextView mTotalTime;
+
     @Override
     protected int getLayoutResourceId() {
         return R.layout.activity_player;
@@ -81,7 +79,7 @@ public class PlayerActivity extends BaseActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 LogUtils.d(TAG, "onProgressChanged, progress = " + progress + ", fromUser = " + fromUser);
-                if(fromUser) {
+                if (fromUser) {
                     mProgress = progress;
                 }
             }
@@ -166,6 +164,7 @@ public class PlayerActivity extends BaseActivity {
 
     /**
      * Convert ms to hh:mm:ss
+     *
      * @param millis
      * @return
      */

@@ -1,8 +1,5 @@
 package com.qiyi.apilib.utils;
 
-/**
- * Created by zhouxiaming on 2017/5/8.
- */
 
 public class ImageUtils {
     public static String IMG_120_160 = "_120_160";

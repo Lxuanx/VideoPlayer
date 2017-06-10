@@ -10,11 +10,11 @@
     tools:ignore="MissingPrefix">
     <include
         android:id="@+id/item1"
+        layout="@layout/card_video_info_item"
         android:layout_width="0dip"
-        android:layout_weight="0.5"
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/video_card_margin_margin_horizontal"
-        layout="@layout/card_video_info_item"/>
+        android:layout_weight="0.5"/>
     <include
         android:id="@+id/item2"
         android:layout_width="0dip"

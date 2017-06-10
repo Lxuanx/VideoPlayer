@@ -1,4 +1,4 @@
-package com.qiyi.openapi.demo;
+package com.qiyi.openapi.demo.utils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,9 +7,6 @@ import android.content.Intent;
 import com.qiyi.apilib.utils.LogUtils;
 import com.qiyi.openapi.demo.activity.PlayerActivity;
 
-/**
- * Created by zhouxiaming on 2017/5/8.
- */
 
 public class QYPlayerUtils {
     private static String TAG = "QYPlayerUtils";

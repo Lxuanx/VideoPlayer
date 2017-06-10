@@ -7,7 +7,6 @@ import java.util.List;
 
 /**
  * 推荐页的实体类
- * Created by zhouxiaming on 2017/5/8.
  */
 
 public class RecommendEntity extends BaseEntity {

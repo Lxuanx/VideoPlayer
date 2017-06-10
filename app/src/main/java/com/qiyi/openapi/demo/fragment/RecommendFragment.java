@@ -1,6 +1,5 @@
 package com.qiyi.openapi.demo.fragment;
 
-import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,11 +14,7 @@ import com.qiyi.openapi.demo.presenter.RecommendContract;
 import com.qiyi.openapi.demo.presenter.RecommendPresenter;
 
 
-/**
- * Created by zhouxiaming on 2017/5/7.
- */
-
-public class RecommendFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, RecommendContract.IView{
+public class RecommendFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, RecommendContract.IView {
     private SwipeRefreshLayout mRefreshLayout;
     private RecyclerView mRecyclerView;
     private RecommendPresenter mPresenter;
@@ -28,6 +23,7 @@ public class RecommendFragment extends BaseFragment implements SwipeRefreshLayou
     public static RecommendFragment newInstance() {
         return new RecommendFragment();
     }
+
     @Override
     protected int getLayoutResourceId() {
         return R.layout.fragment_recommend;
@@ -41,8 +37,8 @@ public class RecommendFragment extends BaseFragment implements SwipeRefreshLayou
         toolbar.setTitle(R.string.recommend_title);
         setActionBar(toolbar);
 
-        mRefreshLayout = (SwipeRefreshLayout) mRootView.findViewById(R.id.swipe_refresh_layout);
         mRecyclerView = (RecyclerView) mRootView.findViewById(R.id.recycler_view);
+        mRefreshLayout = (SwipeRefreshLayout) mRootView.findViewById(R.id.swipe_refresh_layout);
         mRefreshLayout.setOnRefreshListener(this);
         mRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
@@ -51,15 +47,10 @@ public class RecommendFragment extends BaseFragment implements SwipeRefreshLayou
 
         GridLayoutManager layoutManager = new GridLayoutManager(mActivity, RecommendAdapter.ROW_NUM);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(layoutManager);
         mAdapter = new RecommendAdapter(mActivity);
+        mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setAdapter(mAdapter);
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
     }
 
     @Override
@@ -70,7 +61,7 @@ public class RecommendFragment extends BaseFragment implements SwipeRefreshLayou
 
     @Override
     public void onRefresh() {
-        mPresenter.loadRecommendDetailFromServer(false);
+        mPresenter.loadRecommendDetailFromServer(true);
     }
 
     @Override
@@ -94,7 +85,6 @@ public class RecommendFragment extends BaseFragment implements SwipeRefreshLayou
         mRefreshLayout.setRefreshing(false);
         Toast.makeText(mActivity, R.string.network_error, Toast.LENGTH_SHORT).show();
     }
-
 
     @Override
     public void renderRecommendDetail(RecommendEntity recommendEntity) {

@@ -3,8 +3,6 @@ package com.qiyi.apilib.utils;
 /**
  * 网络状态
  * 
- * @author guozhigang
- * @date 2015/03/27
  */
 public enum NetworkStatus {
 
