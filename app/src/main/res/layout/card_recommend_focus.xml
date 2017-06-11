@@ -26,8 +26,17 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:orientation="horizontal"
-            android:paddingBottom="10dip">
-        </LinearLayout>
+            android:paddingBottom="30dip"/>
+
+        <TextView
+            android:id="@+id/recommend_focus_tv"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/trans_black"
+            android:gravity="center"
+            android:text="test"
+            android:textColor="@color/text_white"/>
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.qiyi.apilib.ApiLib;
@@ -43,25 +44,29 @@ public class CycleBanner {
     int mCurrentPos;
 
     boolean mCanAutoCycle = true;
+    private final TextView mTitleTextView;
 
     public CycleBanner(Context context, View rootView) {
         mWeakContext = new WeakReference<>(context);
         mLayoutInflater = LayoutInflater.from(context);
+
+        mTitleTextView = (TextView) rootView.findViewById(R.id.recommend_focus_tv);
+        mIndicatorContainer = (LinearLayout) rootView.findViewById(R.id.recommend_focus_ll);
+
         mViewPager = (ViewPager) rootView.findViewById(R.id.recommend_focus_vp);
         calculateViewPageSize();
         mPagerAdapter = new CyclePagerAdapter();
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.addOnPageChangeListener(mOnPageChangeListener);
 
-        mIndicatorContainer = (LinearLayout) rootView.findViewById(R.id.recommend_focus_ll);
     }
 
     /**
-     * 根据焦点图的大小来计算ViewPage的大小，目前焦点图大小是 640*316
+     * 根据焦点图的大小来计算ViewPage的大小，目前焦点图大小是 640*310
      */
     private void calculateViewPageSize() {
         int screenWidth = ApiLib.CONTEXT.getResources().getDisplayMetrics().widthPixels;
-        int viewPagerHeight = (int) (316.0f / 640.0f * screenWidth);
+        int viewPagerHeight = (int) (310.0f / 640.0f * screenWidth);
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mViewPager.getLayoutParams();
         layoutParams.width = screenWidth;
         layoutParams.height = viewPagerHeight;
@@ -202,6 +207,8 @@ public class CycleBanner {
                 mIndicators.get(i).setBackgroundResource(R.drawable.circle_dot_normal);
             }
         }
+
+        mTitleTextView.setText(mData.get(realPos).shortTitle);
     }
 
     private void start() {
