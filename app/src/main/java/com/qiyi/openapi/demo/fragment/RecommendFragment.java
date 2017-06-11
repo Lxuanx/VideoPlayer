@@ -73,6 +73,7 @@ public class RecommendFragment extends BaseFragment implements SwipeRefreshLayou
     public void dismissLoadingView() {
         hideLoadingBar();
         mRefreshLayout.setRefreshing(false);
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override

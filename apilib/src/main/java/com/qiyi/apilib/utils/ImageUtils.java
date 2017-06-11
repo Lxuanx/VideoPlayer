@@ -11,6 +11,7 @@ public class ImageUtils {
     public static String IMG_170_100 = "_170_100";
     public static String IMG_284_160 = "_284_160";
     public static String IMG_480_360 = "_480_360";
+    public static String IMG_640_316 = "_640_316";
 
     /**
      * 获取指定分辨率的图片URL

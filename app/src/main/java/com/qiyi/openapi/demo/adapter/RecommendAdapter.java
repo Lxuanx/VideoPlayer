@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.qiyi.apilib.ApiLib;
 import com.qiyi.apilib.model.BaseEntity;
 import com.qiyi.apilib.model.ChannelEntity;
@@ -18,10 +19,9 @@ import com.qiyi.apilib.model.VideoInfo;
 import com.qiyi.apilib.utils.ImageUtils;
 import com.qiyi.apilib.utils.StringUtils;
 import com.qiyi.apilib.utils.UiUtils;
-import com.qiyi.openapi.demo.utils.QYPlayerUtils;
 import com.qiyi.openapi.demo.R;
+import com.qiyi.openapi.demo.utils.QYPlayerUtils;
 import com.qiyi.openapi.demo.view.CycleBanner;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -283,9 +283,9 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 snsScore.setText("");
             }
 
-            Picasso.with(ApiLib.CONTEXT).load(ImageUtils.getRegImage(video.img, ImageUtils.IMG_260_360)).into(cover);
-//            Glide.clear(cover); //清除缓存
-//            Glide.with(ApiLib.CONTEXT).load(ImageUtils.getRegImage(video.img, ImageUtils.IMG_260_360)).animate(R.anim.alpha_on).into(cover);
+//            Picasso.with(ApiLib.CONTEXT).load(ImageUtils.getRegImage(video.img, ImageUtils.IMG_260_360)).into(cover);
+            Glide.clear(cover); //清除缓存
+            Glide.with(ApiLib.CONTEXT).load(ImageUtils.getRegImage(video.img, ImageUtils.IMG_260_360)).animate(R.anim.alpha_on).into(cover);
 
         }
 
@@ -365,9 +365,9 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 snsScore.setText("");
             }
             itemVew.setTag(R.id.tag_key, video);
-            Picasso.with(ApiLib.CONTEXT).load(ImageUtils.getRegImage(video.img, ImageUtils.IMG_480_270)).into(cover);
-//            Glide.clear(cover); //清除缓存
-//            Glide.with(ApiLib.CONTEXT).load(ImageUtils.getRegImage(video.img, ImageUtils.IMG_480_270)).animate(R.anim.alpha_on).into(cover);
+//            Picasso.with(ApiLib.CONTEXT).load(ImageUtils.getRegImage(video.img, ImageUtils.IMG_480_270)).into(cover);
+            Glide.clear(cover); //清除缓存
+            Glide.with(ApiLib.CONTEXT).load(ImageUtils.getRegImage(video.img, ImageUtils.IMG_480_270)).animate(R.anim.alpha_on).into(cover);
         }
 
         @Override

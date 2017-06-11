@@ -5,6 +5,7 @@
     android:id="@+id/channel_list_item_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/video_card_margin_margin_horizontal"
     android:foreground="?attr/selectableItemBackground"
     card_view:cardCornerRadius="0dip"
     card_view:cardElevation="0dip">
@@ -12,15 +13,12 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/video_card_margin_margin_horizontal"
         android:padding="@dimen/video_card_margin_margin_horizontal">
 
         <android.support.v4.view.ViewPager
             android:id="@+id/recommend_focus_vp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </android.support.v4.view.ViewPager>
+            android:layout_height="wrap_content"/>
 
         <LinearLayout
             android:id="@+id/recommend_focus_ll"
@@ -28,9 +26,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:paddingBottom="10dip"
-            android:layout_marginBottom="10dip"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingBottom="10dip">
         </LinearLayout>
 
     </RelativeLayout>

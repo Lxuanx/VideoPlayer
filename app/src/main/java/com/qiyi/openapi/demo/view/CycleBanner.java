@@ -13,11 +13,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.bumptech.glide.Glide;
 import com.qiyi.apilib.ApiLib;
 import com.qiyi.apilib.model.VideoInfo;
-import com.qiyi.openapi.demo.utils.QYPlayerUtils;
 import com.qiyi.openapi.demo.R;
-import com.squareup.picasso.Picasso;
+import com.qiyi.openapi.demo.utils.QYPlayerUtils;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -49,22 +49,23 @@ public class CycleBanner {
         mLayoutInflater = LayoutInflater.from(context);
         mViewPager = (ViewPager) rootView.findViewById(R.id.recommend_focus_vp);
         calculateViewPageSize();
-        mIndicatorContainer = (LinearLayout) rootView.findViewById(R.id.recommend_focus_ll);
         mPagerAdapter = new CyclePagerAdapter();
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.addOnPageChangeListener(mOnPageChangeListener);
+
+        mIndicatorContainer = (LinearLayout) rootView.findViewById(R.id.recommend_focus_ll);
     }
 
     /**
      * 根据焦点图的大小来计算ViewPage的大小，目前焦点图大小是 640*316
      */
     private void calculateViewPageSize() {
-        int screenWidth = ApiLib.CONTEXT.getResources().getDisplayMetrics().widthPixels - ApiLib.CONTEXT.getResources().getDimensionPixelSize(R.dimen.video_card_margin_margin_horizontal) * 2 * 2;
-        int viewPagerHeight = (int) (316.0f / (float) 640 * screenWidth);
+        int screenWidth = ApiLib.CONTEXT.getResources().getDisplayMetrics().widthPixels;
+        int viewPagerHeight = (int) (360.0f / 640.0f * screenWidth);
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mViewPager.getLayoutParams();
+        layoutParams.width = screenWidth;
         layoutParams.height = viewPagerHeight;
         mViewPager.setLayoutParams(layoutParams);
-
     }
 
 
@@ -144,9 +145,9 @@ public class CycleBanner {
 
             focusImageView = (ImageView) focusView.findViewById(R.id.focus_image);
             focusView.setTag(R.id.tag_key, mData.get(realPosition));
-            Picasso.with(ApiLib.CONTEXT).load(imgUrl).into(focusImageView);
-//            Glide.clear(focusImageView); //清除缓存
-//            Glide.with(ApiLib.CONTEXT).load(imgUrl).animate(R.anim.alpha_on).into(focusImageView);
+//            Picasso.with(ApiLib.CONTEXT).load(imgUrl).centerCrop().into(focusImageView);
+            Glide.clear(focusImageView); //清除缓存
+            Glide.with(ApiLib.CONTEXT).load(imgUrl).animate(R.anim.alpha_on).into(focusImageView);
             focusView.setOnClickListener(this);
             container.addView(focusView);
             return focusView;
