@@ -13,9 +13,9 @@
     <dimen name="card_recycler_corner_radius">2dp</dimen>
     <dimen name="card_recycler_elevation">2dp</dimen>
     <dimen name="video_card_margin_margin_horizontal">4dp</dimen>
-    <dimen name="video_card_margin_left_horizontal">8dp</dimen>
     <dimen name="text_card_margin_horizontal">4dp</dimen>
 
+    <dimen name="separate_line_wight">8dp</dimen>
     <dimen name="separate_line_height">8dp</dimen>
     <dimen name="channel_card_height">50dp</dimen>
 </resources>

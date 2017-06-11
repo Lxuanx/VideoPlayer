@@ -61,7 +61,7 @@ public class CycleBanner {
      */
     private void calculateViewPageSize() {
         int screenWidth = ApiLib.CONTEXT.getResources().getDisplayMetrics().widthPixels;
-        int viewPagerHeight = (int) (360.0f / 640.0f * screenWidth);
+        int viewPagerHeight = (int) (316.0f / 640.0f * screenWidth);
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) mViewPager.getLayoutParams();
         layoutParams.width = screenWidth;
         layoutParams.height = viewPagerHeight;
@@ -145,7 +145,6 @@ public class CycleBanner {
 
             focusImageView = (ImageView) focusView.findViewById(R.id.focus_image);
             focusView.setTag(R.id.tag_key, mData.get(realPosition));
-//            Picasso.with(ApiLib.CONTEXT).load(imgUrl).centerCrop().into(focusImageView);
             Glide.clear(focusImageView); //清除缓存
             Glide.with(ApiLib.CONTEXT).load(imgUrl).animate(R.anim.alpha_on).into(focusImageView);
             focusView.setOnClickListener(this);

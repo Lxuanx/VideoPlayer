@@ -332,7 +332,7 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
          */
         private void resizeImageView(ImageView cover) {
             int screenWidth = context.getResources().getDisplayMetrics().widthPixels;
-            int coverWidth = (screenWidth - context.getResources().getDimensionPixelSize(R.dimen.video_card_margin_margin_horizontal) * 2 * 4) / 2;
+            int coverWidth = (screenWidth - context.getResources().getDimensionPixelSize(R.dimen.video_card_margin_margin_horizontal) * 2 * 2) / 2;
             int coverHeight = (int) (270.0f / 480.0f * coverWidth);
             cover.setMinimumHeight(coverHeight);
             cover.setMaxHeight(coverHeight);
