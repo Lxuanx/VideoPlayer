@@ -1285,4 +1285,14 @@ public class StringUtils {
         }
         return -1;
     }
+
+    public static String concatString(String... arrays) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < arrays.length; i++) {
+            if (null != arrays[i]) {
+                sb.append(arrays[i]);
+            }
+        }
+        return sb.toString();
+    }
 }

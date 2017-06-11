@@ -11,7 +11,7 @@ import java.util.List;
 
 public class RecommendEntity extends BaseEntity {
     @SerializedName("data")
-    public List<RecommendItem> recommendItemList = new ArrayList<RecommendItem>();
+    public List<RecommendItem> recommendItemList = new ArrayList<>();
 
     /**
      * 推荐页每个频道数据
@@ -27,6 +27,6 @@ public class RecommendEntity extends BaseEntity {
         public String channelName;
 
         @SerializedName("video_list")
-        public List<VideoInfo> videoInfoList = new ArrayList<VideoInfo>();
+        public List<VideoInfo> videoInfoList = new ArrayList<>();
     }
 }
