@@ -5,22 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/video_card_margin_margin_horizontal"
-    android:orientation="horizontal"
     android:background="@color/white"
+    android:orientation="horizontal"
     tools:ignore="MissingPrefix">
     <include
         android:id="@+id/item1"
         layout="@layout/card_video_info_item"
-        android:layout_width="0dip"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/video_card_margin_margin_horizontal"
+        android:layout_marginLeft="@dimen/video_card_margin_left_horizontal"
         android:layout_weight="0.5"/>
     <include
         android:id="@+id/item2"
-        android:layout_width="0dip"
-        android:layout_weight="0.5"
-        android:layout_marginLeft="@dimen/video_card_margin_margin_horizontal"
+        layout="@layout/card_video_info_item"
+        android:layout_width="0dp"
+        android:layout_marginRight="@dimen/video_card_margin_margin_horizontal"
         android:layout_height="wrap_content"
-        layout="@layout/card_video_info_item"/>
+        android:layout_weight="0.5"/>
 
 </LinearLayout>

@@ -17,5 +17,8 @@
     <color name="circle_dot_stroke_color">#ffffff</color>
     <color name="circle_dot_solid_normal_color">#AAAAAA</color>
     <color name="circle_dot_solid_focus_color">@color/colorPrimary</color>
-    <color name="toolbar_dark_background">#474747</color>
+
+    <color name="separate_line_background">#e7e7e7</color>
+
+
 </resources>

@@ -36,9 +36,9 @@ public class RecommendPresenter implements RecommendContract.IPresenter {
             mView.showNetWorkErrorView();
             return;
         }
-        if (showLoadingView) {
-            this.mView.showLoadingView();
-        }
+//        if (showLoadingView) {
+//            this.mView.showLoadingView();
+//        }
 
         ApiService apiService = ApiClient.getAPiService(ApiURL.API_REALTIME_HOST);
         apiService.qiyiRecommendDetail(ApiParamsGen.genRecommendDetailParams(pageIndex, DEFAULT_PAGE_SIZE))
