@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#4CAF50</color>
-    <color name="colorPrimaryDark">#388E3C</color>
+    <!--状态栏颜色-->
+    <color name="colorPrimary">#474747</color>
+    <!--Appbar背景色-->
+    <color name="colorPrimaryDark">#474747</color>
+    <!--控制各个控件被选中时的颜色-->
     <color name="colorAccent">#B9F6CA</color>
-    <color name="activity_background">#EEEEEE</color>
+    <!--页面背景色-->
+    <color name="activity_background">#474747</color>
     <color name="tab_selected_text_color">#000000</color>
     <color name="text_white">#ffffff</color>
     <color name="white">#ffffff</color>
@@ -13,4 +17,5 @@
     <color name="circle_dot_stroke_color">#ffffff</color>
     <color name="circle_dot_solid_normal_color">#AAAAAA</color>
     <color name="circle_dot_solid_focus_color">@color/colorPrimary</color>
+    <color name="toolbar_dark_background">#474747</color>
 </resources>
