@@ -47,16 +47,16 @@ public class PlayerActivity extends BaseActivity {
             finish();
             return;
         }
-        mVideoView = (QiyiVideoView) findViewById(R.id.id_videoview);
+        mVideoView = (QiyiVideoView) findViewById(R.id.player_vv);
         //mVideoView.setPlayData("667737400");
         mVideoView.setPlayData(tid);
         //设置回调，监听播放器状态
         setPlayerCallback();
 
-        mCurrentTime = (TextView) findViewById(R.id.id_current_time);
-        mTotalTime = (TextView) findViewById(R.id.id_total_time);
+        mCurrentTime = (TextView) findViewById(R.id.current_time_tv);
+        mTotalTime = (TextView) findViewById(R.id.total_time_tv);
 
-        mPlayPauseBtn = (Button) findViewById(R.id.id_playPause);
+        mPlayPauseBtn = (Button) findViewById(R.id.play_pause_btn);
         mPlayPauseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,7 +72,7 @@ public class PlayerActivity extends BaseActivity {
             }
         });
 
-        mSeekBar = (SeekBar) findViewById(R.id.id_progress);
+        mSeekBar = (SeekBar) findViewById(R.id.progress_seekbar);
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             private int mProgress = 0;
 

@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AndroidPlayDemo.iml" filepath="$PROJECT_DIR$/AndroidPlayDemo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/OpenAPIDemo.iml" filepath="$PROJECT_DIR$/OpenAPIDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/apilib/apilib.iml" filepath="$PROJECT_DIR$/apilib/apilib.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vp.iml" filepath="$PROJECT_DIR$/vp.iml" />
     </modules>
   </component>
 </project>
