@@ -4,6 +4,8 @@
 
     <!--网络访问需要的权限-->
     <uses-permission android:name="android.permission.INTERNET" />
+    <!--允许一个程序修改当前设置-->
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION"/>
     <!--获取手机IMEI号需要的权限-->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!--获取WI-FI状态以及Mac地址需要的权限-->
@@ -28,7 +30,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.PlayerActivity" />
+        <activity android:name=".activity.PlayerActivity"
+                  android:configChanges="keyboard|orientation"/>
     </application>
 
 </manifest>

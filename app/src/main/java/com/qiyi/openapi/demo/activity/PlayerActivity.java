@@ -1,16 +1,23 @@
 package com.qiyi.openapi.demo.activity;
 
+import android.content.pm.ActivityInfo;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.qiyi.apilib.ApiLib;
 import com.qiyi.apilib.utils.LogUtils;
 import com.qiyi.apilib.utils.StringUtils;
+import com.qiyi.apilib.utils.UiUtils;
 import com.qiyi.openapi.demo.R;
 import com.qiyi.video.playcore.ErrorCode;
 import com.qiyi.video.playcore.IQYPlayerHandlerCallBack;
@@ -18,19 +25,30 @@ import com.qiyi.video.playcore.QiyiVideoView;
 
 import java.util.concurrent.TimeUnit;
 
+import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+
 
 public class PlayerActivity extends BaseActivity {
     private static final int PERMISSION_REQUEST_CODE = 7171;
     private static final String TAG = PlayerActivity.class.getSimpleName();
 
     private static final int HANDLER_MSG_UPDATE_PROGRESS = 1;
+    private static final int HANDLER_MSG_CLOSE_SMALL_CONTROL = 2;
     private static final int HANDLER_DEPLAY_UPDATE_PROGRESS = 1000; // 1s
+    private static final int HANDLER_DEPLAY_CLOSE_SMALL_CONTROL = 3000; // 3s
+
+    private boolean isFullScreen = false;
+    private int[] screen;
 
     private QiyiVideoView mVideoView;
     private SeekBar mSeekBar;
-    private Button mPlayPauseBtn;
+    private ImageButton mPlayPauseIb;
     private TextView mCurrentTime;
     private TextView mTotalTime;
+    private LinearLayout mSmallControlLly;
+    private ImageButton mPlayerFullIb;
+    private String mTid;
+    private String mAid;
 
     @Override
     protected int getLayoutResourceId() {
@@ -40,35 +58,75 @@ public class PlayerActivity extends BaseActivity {
     @Override
     protected void initView() {
         super.initView();
+        screen = UiUtils.getScreenWidthAndHeight(this);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        String aid = getIntent().getStringExtra("aid");
-        String tid = getIntent().getStringExtra("tid");
-        if (StringUtils.isEmpty(tid)) {
+        mAid = getIntent().getStringExtra("aid");
+        mTid = getIntent().getStringExtra("tid");
+        if (StringUtils.isEmpty(mTid)) {
             finish();
             return;
         }
+        mSmallControlLly = (LinearLayout) findViewById(R.id.small_control_lly);
+
         mVideoView = (QiyiVideoView) findViewById(R.id.player_vv);
         //mVideoView.setPlayData("667737400");
-        mVideoView.setPlayData(tid);
+        mVideoView.setPlayData(mTid);
         //设置回调，监听播放器状态
         setPlayerCallback();
+        mVideoView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mSmallControlLly.getVisibility() != View.VISIBLE) {
+                    mSmallControlLly.setVisibility(View.VISIBLE);
+                    mMainHandler.sendEmptyMessageDelayed(HANDLER_MSG_CLOSE_SMALL_CONTROL, HANDLER_DEPLAY_CLOSE_SMALL_CONTROL);
+                } else {
+                    mSmallControlLly.setVisibility(View.GONE);
+                    mMainHandler.removeMessages(HANDLER_MSG_CLOSE_SMALL_CONTROL);
+                }
+            }
+        });
 
         mCurrentTime = (TextView) findViewById(R.id.current_time_tv);
         mTotalTime = (TextView) findViewById(R.id.total_time_tv);
 
-        mPlayPauseBtn = (Button) findViewById(R.id.play_pause_btn);
-        mPlayPauseBtn.setOnClickListener(new View.OnClickListener() {
+        mPlayPauseIb = (ImageButton) findViewById(R.id.player_pause_ib);
+        mPlayPauseIb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (mVideoView.isPlaying()) {
                     mVideoView.pause();
-                    mPlayPauseBtn.setText("Play");
+                    Glide.clear(mPlayPauseIb);
+                    Glide.with(ApiLib.CONTEXT).load(R.drawable.player_pause).into(mPlayPauseIb);
                     mMainHandler.removeMessages(HANDLER_MSG_UPDATE_PROGRESS);
                 } else {
                     mVideoView.start();
-                    mPlayPauseBtn.setText("Pause");
+                    Glide.clear(mPlayPauseIb);
+                    Glide.with(ApiLib.CONTEXT).load(R.drawable.player_full).into(mPlayPauseIb);
                     mMainHandler.sendEmptyMessageDelayed(HANDLER_MSG_UPDATE_PROGRESS, HANDLER_DEPLAY_UPDATE_PROGRESS);
                 }
+            }
+        });
+
+        mPlayerFullIb = (ImageButton) findViewById(R.id.play_full_ib);
+        mPlayerFullIb.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.HONEYCOMB)
+            @Override
+            public void onClick(View v) {
+                int current = mVideoView.getCurrentPosition();
+                if (isFullScreen) {
+                    isFullScreen = false;
+                    mVideoView.getLayoutParams().width = screen[0];
+                    mVideoView.getLayoutParams().height = getResources().getDimensionPixelSize(R.dimen.aqy_video_view_height);
+                    mVideoView.requestLayout();
+                    setRequestedOrientation(SCREEN_ORIENTATION_PORTRAIT);
+                } else {
+                    isFullScreen = true;
+                    mVideoView.getLayoutParams().width = screen[1];
+                    mVideoView.getLayoutParams().height = screen[0];
+                    mVideoView.requestLayout();
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                }
+                mVideoView.seekTo(current);
             }
         });
 
@@ -95,6 +153,7 @@ public class PlayerActivity extends BaseActivity {
                 mVideoView.seekTo(mProgress);
             }
         });
+
     }
 
     private void setPlayerCallback() {
@@ -135,7 +194,19 @@ public class PlayerActivity extends BaseActivity {
     }
 
     /**
-     * Query and update the play progress every 1 second.
+     * Convert ms to hh:mm:ss
+     *
+     * @param millis
+     * @return
+     */
+    private String ms2hms(int millis) {
+        return String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis),
+                TimeUnit.MILLISECONDS.toMinutes(millis) % TimeUnit.HOURS.toMinutes(1),
+                TimeUnit.MILLISECONDS.toSeconds(millis) % TimeUnit.MINUTES.toSeconds(1));
+    }
+
+    /**
+     * 每一秒查询和更新进度条
      */
     private Handler mMainHandler = new Handler() {
 
@@ -156,23 +227,13 @@ public class PlayerActivity extends BaseActivity {
                     }
                     mMainHandler.sendEmptyMessageDelayed(HANDLER_MSG_UPDATE_PROGRESS, HANDLER_DEPLAY_UPDATE_PROGRESS);
                     break;
+                case HANDLER_MSG_CLOSE_SMALL_CONTROL:
+                    mSmallControlLly.setVisibility(View.GONE);
                 default:
                     break;
             }
         }
     };
-
-    /**
-     * Convert ms to hh:mm:ss
-     *
-     * @param millis
-     * @return
-     */
-    private String ms2hms(int millis) {
-        return String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis),
-                TimeUnit.MILLISECONDS.toMinutes(millis) % TimeUnit.HOURS.toMinutes(1),
-                TimeUnit.MILLISECONDS.toSeconds(millis) % TimeUnit.MINUTES.toSeconds(1));
-    }
 
     IQYPlayerHandlerCallBack mCallBack = new IQYPlayerHandlerCallBack() {
         /**

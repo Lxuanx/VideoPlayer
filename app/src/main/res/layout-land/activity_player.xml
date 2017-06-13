@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/player_rly"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <com.qiyi.video.playcore.QiyiVideoView
+        android:id="@+id/player_vv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"/>
+
+    <LinearLayout
+        android:id="@+id/small_control_lly"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignBottom="@id/player_vv"
+        android:background="@color/trans_black"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+        <ImageButton
+            android:id="@+id/player_pause_ib"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/player_pause"/>
+
+        <TextView
+            android:id="@+id/current_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="14dp"
+            android:layout_marginStart="14dp"
+            android:textColor="@android:color/white"/>
+
+        <SeekBar
+            android:id="@+id/progress_seekbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:max="100"
+            android:progress="0"
+            android:thumb="@drawable/yuan"/>
+        <TextView
+            android:id="@+id/total_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="14dp"
+            android:layout_marginRight="14dp"
+            android:textColor="@android:color/white"/>
+
+        <ImageButton
+            android:id="@+id/play_full_ib"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/player_full"/>
+    </LinearLayout>
+
+</RelativeLayout>
