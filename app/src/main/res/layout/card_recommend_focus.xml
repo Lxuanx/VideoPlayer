@@ -35,7 +35,6 @@
             android:layout_alignParentBottom="true"
             android:background="@color/trans_black"
             android:gravity="center"
-            android:text="test"
             android:textColor="@android:color/white"/>
 
     </RelativeLayout>

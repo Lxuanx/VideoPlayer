@@ -165,7 +165,7 @@ public class CycleBanner {
                 return;
             }
             VideoInfo videoInfo = (VideoInfo) v.getTag(R.id.tag_key);
-            QYPlayerUtils.jumpToPlayerActivity(context, videoInfo.aId, videoInfo.tId);
+            QYPlayerUtils.jumpToPlayerActivity(context, videoInfo.aId, videoInfo.tId, videoInfo);
         }
     }
 

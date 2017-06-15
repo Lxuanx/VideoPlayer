@@ -10,7 +10,52 @@
         android:layout_height="@dimen/aqy_video_view_height"/>
 
     <LinearLayout
-        android:id="@+id/small_control_lly"
+        android:id="@+id/top_control_lly"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/trans_black"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" android:paddingLeft="16dp"
+        android:paddingRight="16dp" android:visibility="gone">
+
+        <ImageButton
+            android:id="@+id/player_back_ib"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/player_back"/>
+
+        <TextView
+            android:id="@+id/video_title_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="14dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:layout_marginStart="14dp"
+            android:layout_weight="1"
+            android:textColor="@android:color/white"/>
+
+
+        <ImageButton
+            android:id="@+id/player_set_ib"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/player_set"/>
+
+        <TextView
+            android:id="@+id/system_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="14dp"
+            android:layout_marginStart="14dp"
+            android:textColor="@android:color/white"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottom_control_lly"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_alignBottom="@id/player_vv"
@@ -24,7 +69,7 @@
             android:id="@+id/player_pause_ib"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:background="@drawable/player_pause"/>
+            android:background="@color/trans"/>
 
         <TextView
             android:id="@+id/current_time_tv"
@@ -41,7 +86,7 @@
             android:layout_weight="1"
             android:max="100"
             android:progress="0"
-            android:thumb="@drawable/yuan"/>
+            android:thumb="@drawable/player_tump"/>
         <TextView
             android:id="@+id/total_time_tv"
             android:layout_width="wrap_content"
@@ -63,28 +108,43 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/player_vv"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="10dp">
 
         <TextView
-            android:id="@+id/video_info_title"
+            android:id="@+id/video_info_title_tv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/text_card_margin_horizontal"
+            android:ellipsize="end"
+            android:lines="1"
+            android:shadowColor="#AA000000"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="1"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"/>
         <TextView
             android:id="@+id/video_info_date_format"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:id="@+id/video_info_shortTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:id="@+id/video_info_update_num"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/text_card_margin_horizontal"
+            android:ellipsize="end"
+            android:lines="1"
+            android:shadowColor="#AA000000"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="1"/>
         <TextView
             android:id="@+id/video_info_play_count"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/text_card_margin_horizontal"
+            android:ellipsize="end"
+            android:lines="1"
+            android:shadowColor="#AA000000"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="1"/>
     </LinearLayout>
 </RelativeLayout>

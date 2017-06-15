@@ -295,7 +295,7 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             BaseEntity dataObj = entityList.get(position);
             if (dataObj instanceof VideoInfo) {
                 VideoInfo videoInfo = (VideoInfo) dataObj;
-                QYPlayerUtils.jumpToPlayerActivity(context, videoInfo.aId, videoInfo.tId);
+                QYPlayerUtils.jumpToPlayerActivity(context, videoInfo.aId, videoInfo.tId, videoInfo);
             }
         }
     }
@@ -339,7 +339,7 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             cover.setMaxHeight(coverWidth);
             cover.setMinimumWidth(coverWidth);
             cover.setAdjustViewBounds(false);
-            //set height as layoutParameter too
+
             LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) cover.getLayoutParams();
             lp.height = coverHeight;
             lp.width = coverWidth;
@@ -380,7 +380,7 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         @Override
         public void onClick(View v) {
             VideoInfo videoInfo = (VideoInfo) v.getTag(R.id.tag_key);
-            QYPlayerUtils.jumpToPlayerActivity(context, videoInfo.aId, videoInfo.tId);
+            QYPlayerUtils.jumpToPlayerActivity(context, videoInfo.aId, videoInfo.tId, videoInfo);
         }
     }
 
