@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/video_card_margin_margin_horizontal"
+    android:layout_margin="@dimen/video_card_margin_horizontal"
     android:foreground="?selectableItemBackgroundBorderless"
     android:orientation="vertical"
     card_view:cardCornerRadius="0dip"

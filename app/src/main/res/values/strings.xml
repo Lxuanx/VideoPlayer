@@ -16,4 +16,7 @@
     <string name="upload_time">发布时间:%1$s</string>
     <string name="play_count">播放量:%1$s</string>
     <string name="sns_score">评分:%1$s</string>
+    <string name="episode">选集</string>
+    <string name="episode_more">更新至%1$s集/共%2$s集></string>
+    <string name="episode_more_finished">共%1$s集全></string>
 </resources>

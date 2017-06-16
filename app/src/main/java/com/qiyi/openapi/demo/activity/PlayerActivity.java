@@ -6,8 +6,10 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,6 +59,7 @@ public class PlayerActivity extends BaseActivity {
     private boolean mIsPlayFinish;
     private static int sCurrentPosition;
 
+
     @Override
     protected int getLayoutResourceId() {
         return R.layout.activity_player;
@@ -90,17 +93,49 @@ public class PlayerActivity extends BaseActivity {
         if (isFullScreen) {
             initTopControlView();
         } else {
-            initPortView();
+            initNonPlayerView();
         }
         initBottomControlView();
 
     }
 
-    private void initPortView() {
+    private void initNonPlayerView() {
         ((TextView) findViewById(R.id.video_info_title_tv)).setText(mVideoInfo.title);
         ((TextView) findViewById(R.id.video_info_play_count)).setText(ApiLib.CONTEXT.getString(R.string.play_count, mVideoInfo.playCountText));
-        if (!mVideoInfo.dateFormat.equals("1970-01-01")){
+        if (!mVideoInfo.dateFormat.equals("1970-01-01")) {
             ((TextView) findViewById(R.id.video_info_date_format)).setText(ApiLib.CONTEXT.getString(R.string.upload_time, mVideoInfo.dateFormat));
+        }
+
+        LinearLayout episodeLly = (LinearLayout) findViewById(R.id.episode_lly);
+        RelativeLayout episodeRly = (RelativeLayout) findViewById(R.id.episode_rly);
+        // 1: 单视频专辑, 2: 电视剧, 3: 综艺
+        if ("2".equals(mVideoInfo.pType)) {
+            episodeRly.setVisibility(View.VISIBLE);
+            if (mVideoInfo.updateNum.equals(mVideoInfo.totalNum)) {
+                ((TextView) findViewById(R.id.episode_more_tv)).setText(ApiLib.CONTEXT.getString(R.string.episode_more_finished, mVideoInfo.totalNum));
+            } else {
+                ((TextView) findViewById(R.id.episode_more_tv)).setText(ApiLib.CONTEXT.getString(R.string.episode_more, mVideoInfo.updateNum, mVideoInfo.totalNum));
+            }
+            int currentUpdateNum = Integer.valueOf(mVideoInfo.updateNum);
+            for (int i = 0; i < currentUpdateNum; i++) {
+                Button button = new Button(this);
+                button.setText(i + 1 + "");
+                button.setBackgroundResource(R.drawable.episodu_button);
+                episodeLly.addView(button);
+                LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) button.getLayoutParams();
+                lp.width = getResources().getDimensionPixelSize(R.dimen.card_episode_button);
+                lp.height = getResources().getDimensionPixelSize(R.dimen.card_episode_button);
+                lp.setMargins(getResources().getDimensionPixelSize(R.dimen.card_episode), getResources().getDimensionPixelSize(R.dimen.card_episode), getResources().getDimensionPixelSize(R.dimen.card_episode), getResources().getDimensionPixelSize(R.dimen.card_episode));
+                button.requestLayout();
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(ApiLib.CONTEXT, "爱奇艺程序猿哥哥给的API接口不足，未实现ing", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        } else {
+            findViewById(R.id.separate_line).setVisibility(View.GONE);
         }
     }
 

@@ -102,49 +102,11 @@
             android:background="@drawable/player_full"/>
     </LinearLayout>
 
+    <include layout="@layout/card_non_player_part" android:id="@+id/card_non_player_part"/>
 
-    <LinearLayout
-        android:id="@+id/introduction_lly"
+    <View
+        android:layout_below="@id/card_non_player_part"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/player_vv"
-        android:orientation="vertical"
-        android:padding="10dp">
-
-        <TextView
-            android:id="@+id/video_info_title_tv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/text_card_margin_horizontal"
-            android:ellipsize="end"
-            android:lines="1"
-            android:shadowColor="#AA000000"
-            android:shadowDx="1"
-            android:shadowDy="1"
-            android:shadowRadius="1"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"/>
-        <TextView
-            android:id="@+id/video_info_date_format"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/text_card_margin_horizontal"
-            android:ellipsize="end"
-            android:lines="1"
-            android:shadowColor="#AA000000"
-            android:shadowDx="1"
-            android:shadowDy="1"
-            android:shadowRadius="1"/>
-        <TextView
-            android:id="@+id/video_info_play_count"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/text_card_margin_horizontal"
-            android:ellipsize="end"
-            android:lines="1"
-            android:shadowColor="#AA000000"
-            android:shadowDx="1"
-            android:shadowDy="1"
-            android:shadowRadius="1"/>
-    </LinearLayout>
+        android:layout_height="@dimen/separate_line_height"
+        android:background="@color/separate_line_background"/>
 </RelativeLayout>

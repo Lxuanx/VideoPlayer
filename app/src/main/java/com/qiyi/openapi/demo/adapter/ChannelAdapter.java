@@ -99,7 +99,7 @@ public class ChannelAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
          */
         private void resizeImageView(ImageView cover) {
             int screenWidth = context.getResources().getDisplayMetrics().widthPixels;
-            int coverWidth = (screenWidth - context.getResources().getDimensionPixelSize(R.dimen.video_card_margin_margin_horizontal) * 2 * 3) / 3;
+            int coverWidth = (screenWidth - context.getResources().getDimensionPixelSize(R.dimen.video_card_margin_horizontal) * 2 * 3) / 3;
             int coverHeight = (int) (160.0f / 120.0f * coverWidth);
             cover.setMinimumHeight(coverHeight);
             cover.setMaxHeight(coverHeight);

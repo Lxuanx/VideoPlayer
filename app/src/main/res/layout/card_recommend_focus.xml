@@ -5,14 +5,14 @@
     android:id="@+id/channel_list_item_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/video_card_margin_margin_horizontal"
+    android:layout_marginTop="@dimen/video_card_margin_horizontal"
     card_view:cardCornerRadius="0dip"
     card_view:cardElevation="0dip">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/video_card_margin_margin_horizontal">
+        android:padding="@dimen/video_card_margin_horizontal">
 
         <android.support.v4.view.ViewPager
             android:id="@+id/recommend_focus_vp"

@@ -8,13 +8,17 @@
 
     <dimen name="main_card_margin_horizontal">8dp</dimen>
     <dimen name="main_card_margin_vertical">8dp</dimen>
-    <dimen name="card_margin_horizontal">8dp</dimen>
-    <dimen name="card_margin_vertical">8dp</dimen>
+
+    <dimen name="card_margin_normal">8dp</dimen>
+    <dimen name="card_episode">8dp</dimen>
+    <dimen name="card_episode_button">40dp</dimen>
     <dimen name="card_recycler_corner_radius">2dp</dimen>
     <dimen name="card_recycler_elevation">2dp</dimen>
     <dimen name="card_guide_padding">4dp</dimen>
     <dimen name="card_guide_margin">4dp</dimen>
-    <dimen name="video_card_margin_margin_horizontal">4dp</dimen>
+
+    <dimen name="separate_line_padding">8dp</dimen>
+    <dimen name="video_card_margin_horizontal">4dp</dimen>
     <dimen name="text_card_margin_horizontal">4dp</dimen>
 
     <dimen name="aqy_video_view_height">200dp</dimen>

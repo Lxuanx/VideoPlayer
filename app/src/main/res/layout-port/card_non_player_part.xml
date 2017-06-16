@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/introduction_lly"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/player_vv"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/video_info_title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_card_margin_horizontal"
+        android:ellipsize="end"
+        android:lines="1"
+        android:shadowColor="#AA000000"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="1"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"/>
+    <TextView
+        android:id="@+id/video_info_date_format"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_card_margin_horizontal"
+        android:ellipsize="end"
+        android:lines="1"
+        android:shadowColor="#AA000000"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="1"/>
+    <TextView
+        android:id="@+id/video_info_play_count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_card_margin_horizontal"
+        android:ellipsize="end"
+        android:lines="1"
+        android:shadowColor="#AA000000"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="1"/>
+
+    <ImageView
+        android:id="@+id/separate_line"
+        android:layout_width="match_parent"
+               android:layout_height="1dp"
+               android:layout_margin="@dimen/separate_line_padding"
+               android:background="@android:color/darker_gray"/>
+    <RelativeLayout
+        android:id="@+id/episode_rly"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:visibility="gone">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="@dimen/card_margin_normal"
+            android:paddingLeft="@dimen/card_margin_normal"
+            android:paddingRight="@dimen/card_margin_normal"
+            android:paddingStart="@dimen/card_margin_normal"
+            android:text="@string/episode"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/episode_more_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:paddingEnd="@dimen/card_margin_normal"
+            android:paddingLeft="@dimen/card_margin_normal"
+            android:paddingRight="@dimen/card_margin_normal"
+            android:paddingStart="@dimen/card_margin_normal"
+            android:textSize="14sp"/>
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/episode_more_tv">
+            <LinearLayout
+                android:id="@+id/episode_lly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"/>
+        </HorizontalScrollView>
+
+    </RelativeLayout>
+
+</LinearLayout>
