@@ -31,14 +31,15 @@ public class RecommendPresenter implements RecommendContract.IPresenter {
     }
 
     @Override
-    public void loadRecommendDetailFromServer(boolean showLoadingView) {
+    public void loadRecommendDetailFromServer(boolean showMore) {
         if (!NetWorkTypeUtils.isNetAvailable(ApiLib.CONTEXT)) {
             mView.showNetWorkErrorView();
             return;
         }
-//        if (showLoadingView) {
-//            this.mView.showLoadingView();
-//        }
+        if (showMore) {
+            this.mView.showLoadingView();
+            pageIndex++;
+        }
 
         ApiService apiService = ApiClient.getAPiService(ApiURL.API_REALTIME_HOST);
         apiService.qiyiRecommendDetail(ApiParamsGen.genRecommendDetailParams(pageIndex, DEFAULT_PAGE_SIZE))
@@ -48,7 +49,7 @@ public class RecommendPresenter implements RecommendContract.IPresenter {
 
                     @Override
                     public void onNext(RecommendEntity recommendEntity) {
-                        mView.dismissLoadingView();
+//                        mView.dismissLoadingView();
                         if (recommendEntity != null) {
                             mView.renderRecommendDetail(recommendEntity);
                         }
@@ -56,7 +57,8 @@ public class RecommendPresenter implements RecommendContract.IPresenter {
 
                     @Override
                     public void onError(Throwable e) {
-                        mView.dismissLoadingView();
+                        //连接重试
+                        loadRecommendDetailFromServer(false);
                     }
 
                     @Override

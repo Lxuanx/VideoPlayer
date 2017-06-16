@@ -98,8 +98,10 @@ public class PlayerActivity extends BaseActivity {
 
     private void initPortView() {
         ((TextView) findViewById(R.id.video_info_title_tv)).setText(mVideoInfo.title);
-        ((TextView) findViewById(R.id.video_info_date_format)).setText(ApiLib.CONTEXT.getString(R.string.upload_time, mVideoInfo.dateFormat));
         ((TextView) findViewById(R.id.video_info_play_count)).setText(ApiLib.CONTEXT.getString(R.string.play_count, mVideoInfo.playCountText));
+        if (!mVideoInfo.dateFormat.equals("1970-01-01")){
+            ((TextView) findViewById(R.id.video_info_date_format)).setText(ApiLib.CONTEXT.getString(R.string.upload_time, mVideoInfo.dateFormat));
+        }
     }
 
     private void initTopControlView() {

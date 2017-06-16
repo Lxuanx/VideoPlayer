@@ -6,8 +6,9 @@
     android:fitsSystemWindows="true"
     android:clipToPadding="true">
 
+
     <FrameLayout
-        android:id="@+id/fragment_home_holder"
+        android:id="@+id/fragment_channel_holder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"/>

@@ -26,7 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
     private String TAG = RetrofitClient.class.getSimpleName();
     private String host;
-    private static final int RETRY_COUNT = 1;
+    private static final int RETRY_COUNT = 3;
     private static final int RETRY_WAIT_TIME = 2000;
     private boolean isDebug = false;
     private boolean isRetry = false;

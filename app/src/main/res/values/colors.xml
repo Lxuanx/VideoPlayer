@@ -12,9 +12,8 @@
     <color name="blue">#0000ff</color>
     <color name="trans_black">#66000000</color>
     <color name="trans">#00000000</color>
-    <color name="video_name_text_color">#4CAF50</color>
-    <color name="video_playcount_text_color">#388E3C</color>
-    <color name="video_snscore_text_color">#E91E63</color>
+    <color name="guide_selected">#4CAF50</color>
+    <color name="video_snscore_text_color">#B91E63</color>
     <color name="circle_dot_stroke_color">#ffffff</color>
     <color name="circle_dot_solid_normal_color">#AAAAAA</color>
     <color name="circle_dot_solid_focus_color">@color/colorPrimary</color>

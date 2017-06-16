@@ -19,6 +19,8 @@ public class RecommendFragment extends BaseFragment implements SwipeRefreshLayou
     private RecyclerView mRecyclerView;
     private RecommendPresenter mPresenter;
     private RecommendAdapter mAdapter;
+    private int mLastVisibleItemPosition;
+    private boolean mIsCanShowNotMore;
 
     public static RecommendFragment newInstance() {
         return new RecommendFragment();
@@ -45,23 +47,41 @@ public class RecommendFragment extends BaseFragment implements SwipeRefreshLayou
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
 
-        GridLayoutManager layoutManager = new GridLayoutManager(mActivity, RecommendAdapter.ROW_NUM);
+        final GridLayoutManager layoutManager = new GridLayoutManager(mActivity, RecommendAdapter.ROW_NUM);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mAdapter = new RecommendAdapter(mActivity);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState ==RecyclerView.SCROLL_STATE_IDLE && mLastVisibleItemPosition + 1 == mAdapter.getItemCount()) {
+                    if(mIsCanShowNotMore){
+                        showNotMoreView();
+                        mIsCanShowNotMore = false;
+                    }
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                mLastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
+                mIsCanShowNotMore = true;
+            }
+        });
     }
 
     @Override
     protected void loadData() {
-        super.loadData();
-        mPresenter.loadRecommendDetailFromServer(true);
+        mPresenter.loadRecommendDetailFromServer(false);
     }
 
     @Override
     public void onRefresh() {
-        mPresenter.loadRecommendDetailFromServer(true);
+        mPresenter.loadRecommendDetailFromServer(false);
     }
 
     @Override
@@ -70,15 +90,15 @@ public class RecommendFragment extends BaseFragment implements SwipeRefreshLayou
     }
 
     @Override
+    public void showNotMoreView() {
+        Toast.makeText(mActivity, R.string.not_more, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
     public void dismissLoadingView() {
         hideLoadingBar();
         mRefreshLayout.setRefreshing(false);
         mAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void showEmptyView() {
-        mRefreshLayout.setRefreshing(false);
     }
 
     @Override

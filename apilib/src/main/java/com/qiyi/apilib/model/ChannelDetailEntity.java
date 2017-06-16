@@ -40,13 +40,13 @@ public class ChannelDetailEntity extends BaseEntity {
          * 频道的TAG信息列表
          */
         @SerializedName("tag_list")
-        public List<Tag> tagList = new ArrayList<Tag>();
+        public List<Tag> tagList = new ArrayList<>();
 
         /**
          * 视频信息列表
          */
         @SerializedName("video_list")
-        public List<VideoInfo> videoInfoList = new ArrayList<VideoInfo>();
+        public List<VideoInfo> videoInfoList = new ArrayList<>();
 
     }
 
@@ -61,7 +61,17 @@ public class ChannelDetailEntity extends BaseEntity {
         @SerializedName("name_tw")
         public String tagNameTW; //繁体
         @SerializedName("children")
-        public List<TagChildren> tagChildrens = new ArrayList<TagChildren>();
+        public List<TagChildren> tagChildrens = new ArrayList<>();
+
+        @Override
+        public String toString() {
+            return "Tag{" +
+                    "tagId='" + tagId + '\'' +
+                    ", tagName='" + tagName + '\'' +
+                    ", tagNameTW='" + tagNameTW + '\'' +
+                    ", tagChildrens=" + tagChildrens +
+                    '}';
+        }
     }
 
     public class TagChildren extends BaseEntity {
@@ -71,5 +81,14 @@ public class ChannelDetailEntity extends BaseEntity {
         public String tagName;
         @SerializedName("name_tw")
         public String tagNameTW; //繁体
+
+        @Override
+        public String toString() {
+            return "TagChildren{" +
+                    "tagId='" + tagId + '\'' +
+                    ", tagName='" + tagName + '\'' +
+                    ", tagNameTW='" + tagNameTW + '\'' +
+                    '}';
+        }
     }
 }

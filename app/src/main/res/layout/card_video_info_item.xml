@@ -48,7 +48,7 @@
                 android:textSize="14sp"/>
 
             <TextView
-                android:id="@+id/item_image_description"
+                android:id="@+id/item_image_play_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/text_card_margin_horizontal"
@@ -61,7 +61,7 @@
                 android:textColor="@android:color/darker_gray"
                 android:textSize="12sp"/>
             <TextView
-                android:id="@+id/item_image_description2"
+                android:id="@+id/item_image_score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/text_card_margin_horizontal"

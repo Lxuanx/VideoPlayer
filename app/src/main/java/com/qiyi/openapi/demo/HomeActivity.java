@@ -17,6 +17,6 @@ public class HomeActivity extends BaseActivity {
     protected void initView() {
         super.initView();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_holder, RecommendFragment.newInstance()).commitAllowingStateLoss();
+        transaction.replace(R.id.fragment_home_holder, RecommendFragment.newInstance()).commitAllowingStateLoss();
     }
 }

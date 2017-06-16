@@ -54,11 +54,11 @@ public class ApiParamsGen {
      *
      * @param channelId   频道ID
      * @param channelName 频道名称
-     * @param pageIndex   分页码
-     * @param pageSize    每页数据条数
-     * @return
+     * @param sortMode
+     *@param pageIndex   分页码
+     * @param pageSize    每页数据条数   @return
      */
-    public static Map<String, String> genChannelDetailParams(String channelId, String channelName, int pageIndex, int pageSize) {
+    public static Map<String, String> genChannelDetailParams(String channelId, String channelName, int sortMode, int pageIndex, int pageSize) {
         Map<String, String> params = genCommonParams();
         params.put("type", "detail"); //频道详情
         params.put("channel_name", channelName);
@@ -74,7 +74,7 @@ public class ApiParamsGen {
          * 10 周点击排序；
          * 11 昨日点击排序 (热播榜)排序方式。
          */
-        params.put("mode", "11");
+        params.put("mode", String.valueOf(sortMode));
 
         /**
          * 付费方式（付费方式，若无此参数，则返回所有付费和非付费的）：
@@ -109,8 +109,8 @@ public class ApiParamsGen {
      */
     public static Map<String, String> genRecommendDetailParams(int pageIndex, int pageSize) {
         Map<String, String> params = genCommonParams();
-        params.put("page_num", String.valueOf(pageIndex));
-        params.put("page_size", String.valueOf(pageSize));
+        params.put("page_num", String.valueOf(pageIndex));//默认从第 pageIndex 页开始
+        params.put("page_size", String.valueOf(pageSize));//每页加载 pageSize 条视频数据
         return params;
     }
 }

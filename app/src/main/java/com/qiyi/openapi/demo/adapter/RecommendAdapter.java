@@ -1,6 +1,7 @@
 package com.qiyi.openapi.demo.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.qiyi.apilib.ApiLib;
+import com.qiyi.apilib.KeyConstant;
 import com.qiyi.apilib.model.BaseEntity;
 import com.qiyi.apilib.model.ChannelEntity;
 import com.qiyi.apilib.model.RecommendEntity;
@@ -20,6 +22,7 @@ import com.qiyi.apilib.utils.ImageUtils;
 import com.qiyi.apilib.utils.StringUtils;
 import com.qiyi.apilib.utils.UiUtils;
 import com.qiyi.openapi.demo.R;
+import com.qiyi.openapi.demo.activity.ChannelActivity;
 import com.qiyi.openapi.demo.utils.QYPlayerUtils;
 import com.qiyi.openapi.demo.view.CycleBanner;
 
@@ -210,17 +213,28 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
      * 标题的ViewHolder
      */
     class ChannelInfoViewHolder extends BaseViewHolder {
+        private final View channelMoreView;
         TextView channelNameView;
 
         public ChannelInfoViewHolder(View itemView) {
             super(itemView);
             channelNameView = (TextView) itemView.findViewById(R.id.channel_name);
+            channelMoreView = itemView.findViewById(R.id.channel_more);
         }
 
         @Override
         void setData(int position) {
-            ChannelEntity.Channel channel = (ChannelEntity.Channel) entityList.get(position);
+            final ChannelEntity.Channel channel = (ChannelEntity.Channel) entityList.get(position);
             channelNameView.setText(channel.name);
+            channelMoreView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, ChannelActivity.class);
+                    intent.putExtra(KeyConstant.CHANNELID, channel.id);
+                    intent.putExtra(KeyConstant.CHANNELNAME, channel.name);
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 
@@ -236,8 +250,8 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         public VideoInfoViewHolder(View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.item_image_name);
-            playCount = (TextView) itemView.findViewById(R.id.item_image_description);
-            snsScore = (TextView) itemView.findViewById(R.id.item_image_description2);
+            playCount = (TextView) itemView.findViewById(R.id.item_image_play_count);
+            snsScore = (TextView) itemView.findViewById(R.id.item_image_score);
             cover = (ImageView) itemView.findViewById(R.id.item_image_img);
             itemView.setOnClickListener(this);
             resizeImageView(cover);
@@ -311,15 +325,15 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             super(itemView);
             item1View = itemView.findViewById(R.id.item1);
             name1 = (TextView) item1View.findViewById(R.id.item_image_name);
-            playCount1 = (TextView) item1View.findViewById(R.id.item_image_description);
-            snsScore1 = (TextView) item1View.findViewById(R.id.item_image_description2);
+            playCount1 = (TextView) item1View.findViewById(R.id.item_image_play_count);
+            snsScore1 = (TextView) item1View.findViewById(R.id.item_image_score);
             cover1 = (ImageView) item1View.findViewById(R.id.item_image_img);
             item1View.setOnClickListener(this);
             resizeImageView(cover1);
             item2View = itemView.findViewById(R.id.item2);
             name2 = (TextView) item2View.findViewById(R.id.item_image_name);
-            playCount2 = (TextView) item2View.findViewById(R.id.item_image_description);
-            snsScore2 = (TextView) item2View.findViewById(R.id.item_image_description2);
+            playCount2 = (TextView) item2View.findViewById(R.id.item_image_play_count);
+            snsScore2 = (TextView) item2View.findViewById(R.id.item_image_score);
             cover2 = (ImageView) item2View.findViewById(R.id.item_image_img);
             item2View.setOnClickListener(this);
             resizeImageView(cover2);
