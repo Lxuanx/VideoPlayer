@@ -26,6 +26,9 @@ import com.qiyi.video.playcore.ErrorCode;
 import com.qiyi.video.playcore.IQYPlayerHandlerCallBack;
 import com.qiyi.video.playcore.QiyiVideoView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 
@@ -48,16 +51,15 @@ public class PlayerActivity extends BaseActivity {
     private TextView mCurrentTimeTv;
     private TextView mTotalTimeTv;
     private LinearLayout mBottomControlLly;
-    private ImageButton mPlayerFullIb;
     private String mTid;
     private String mAid;
     private VideoInfo mVideoInfo;
     private LinearLayout mTopControlLly;
-    private ImageButton mPlayerBackIb;
-    private ImageButton mPlayerSetIb;
-    private TextView mVideoTitleTv;
     private boolean mIsPlayFinish;
     private static int sCurrentPosition;
+    private TextView mCurrentSystemTimeTv;
+    private SimpleDateFormat mSdf;
+    private View mPlayLoadingLly;
 
 
     @Override
@@ -88,6 +90,8 @@ public class PlayerActivity extends BaseActivity {
                 displayControlLly();
             }
         });
+
+        mPlayLoadingLly = findViewById(R.id.play_loading_lly);
 
         isFullScreen = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
         if (isFullScreen) {
@@ -142,24 +146,26 @@ public class PlayerActivity extends BaseActivity {
     private void initTopControlView() {
         mTopControlLly = (LinearLayout) findViewById(R.id.top_control_lly);
 
-        mPlayerBackIb = (ImageButton) findViewById(R.id.player_back_ib);
-        mPlayerBackIb.setOnClickListener(new View.OnClickListener() {
+        ImageButton playerBackIb = (ImageButton) findViewById(R.id.player_back_ib);
+        playerBackIb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openOrCloseFullScreen();
             }
         });
 
-        mPlayerSetIb = (ImageButton) findViewById(R.id.player_set_ib);
-        mPlayerSetIb.setOnClickListener(new View.OnClickListener() {
+        ImageButton playerSetIb = (ImageButton) findViewById(R.id.player_set_ib);
+        playerSetIb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(ApiLib.CONTEXT, "setting", Toast.LENGTH_SHORT).show();
             }
         });
 
-        mVideoTitleTv = (TextView) findViewById(R.id.video_title_tv);
-        mVideoTitleTv.setText(mVideoInfo.title);
+        ((TextView) findViewById(R.id.video_title_tv)).setText(mVideoInfo.title);
+        mSdf = new SimpleDateFormat("HH:mm", Locale.CHINA);
+        mCurrentSystemTimeTv = (TextView) findViewById(R.id.system_time_tv);
+        mCurrentSystemTimeTv.setText(mSdf.format(new Date(System.currentTimeMillis())));
     }
 
     private void initBottomControlView() {
@@ -177,8 +183,8 @@ public class PlayerActivity extends BaseActivity {
         });
         Glide.with(ApiLib.CONTEXT).load(R.drawable.player_pause).into(mPlayPauseIb);
 
-        mPlayerFullIb = (ImageButton) findViewById(R.id.play_full_ib);
-        mPlayerFullIb.setOnClickListener(new View.OnClickListener() {
+        ImageButton playerFullIb = (ImageButton) findViewById(R.id.play_full_ib);
+        playerFullIb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openOrCloseFullScreen();
@@ -315,6 +321,9 @@ public class PlayerActivity extends BaseActivity {
                         mTotalTimeTv.setText(ms2hms(duration));
                         mCurrentTimeTv.setText(ms2hms(progress));
                     }
+                    if(isFullScreen) {
+                        mCurrentSystemTimeTv.setText(mSdf.format(new Date(System.currentTimeMillis())));
+                    }
                     mMainHandler.sendEmptyMessageDelayed(HANDLER_MSG_UPDATE_PROGRESS, HANDLER_DEPLAY_UPDATE_PROGRESS);
                     break;
                 case HANDLER_MSG_CLOSE_SMALL_CONTROL:
@@ -367,12 +376,15 @@ public class PlayerActivity extends BaseActivity {
          */
         @Override
         public void OnPlayerStateChanged(int i) {
-            if (i == 16) {
+            if (i == 1) {
+                mPlayLoadingLly.setVisibility(View.VISIBLE);
+            } else if (i == 16) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         //点击全屏按钮后三秒后也自动隐藏布局
                         mMainHandler.sendEmptyMessageDelayed(HANDLER_MSG_CLOSE_SMALL_CONTROL, HANDLER_DEPLAY_CLOSE_SMALL_CONTROL);
+                        mPlayLoadingLly.setVisibility(View.GONE);
                         if (isFullScreen) {
                             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                                     WindowManager.LayoutParams.FLAG_FULLSCREEN);

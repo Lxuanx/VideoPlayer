@@ -17,6 +17,8 @@
     <color name="circle_dot_stroke_color">#ffffff</color>
     <color name="circle_dot_solid_normal_color">#AAAAAA</color>
     <color name="circle_dot_solid_focus_color">@color/colorPrimary</color>
+    <color name="splash_bg_light_warm">#FAFBE9</color>
+    <color name="splash_text_brown">#724E31</color>
 
     <color name="separate_line_background">#e7e7e7</color>
 

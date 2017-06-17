@@ -29,6 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        style="@android:style/Widget.Holo.Light.ProgressBar.Inverse"
         android:visibility="visible"/>
 
 </android.support.design.widget.CoordinatorLayout>

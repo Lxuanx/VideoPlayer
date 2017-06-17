@@ -10,48 +10,26 @@
         android:layout_height="@dimen/aqy_video_view_height"/>
 
     <LinearLayout
-        android:id="@+id/top_control_lly"
+        android:id="@+id/play_loading_lly"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:background="@color/trans_black"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" android:paddingLeft="16dp"
-        android:paddingRight="16dp" android:visibility="gone">
+        android:layout_height="@dimen/aqy_video_view_height"
+        android:background="@android:color/black"
+        android:fitsSystemWindows="true"
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/player_back_ib"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:background="@drawable/player_back"/>
-
-        <TextView
-            android:id="@+id/video_title_tv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="14dp"
-            android:layout_marginLeft="14dp"
-            android:layout_marginRight="14dp"
-            android:layout_marginStart="14dp"
-            android:layout_weight="1"
-            android:textColor="@android:color/white"/>
-
-
-        <ImageButton
-            android:id="@+id/player_set_ib"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:background="@drawable/player_set"/>
-
-        <TextView
-            android:id="@+id/system_time_tv"
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:gravity="center"
+                  android:textColor="@android:color/white"
+                  android:text="@string/play_loading"
+                  android:textSize="16sp"/>
+        <ProgressBar
+            android:id="@+id/loading_bar"
+            style="@android:style/Widget.Holo.Light.ProgressBar.Inverse"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="14dp"
-            android:layout_marginStart="14dp"
-            android:textColor="@android:color/white"/>
+            android:layout_height="wrap_content"/>
+
     </LinearLayout>
 
     <LinearLayout
@@ -102,11 +80,11 @@
             android:background="@drawable/player_full"/>
     </LinearLayout>
 
-    <include layout="@layout/card_non_player_part" android:id="@+id/card_non_player_part"/>
+    <include android:id="@+id/card_non_player_part" layout="@layout/card_non_player_part"/>
 
     <View
-        android:layout_below="@id/card_non_player_part"
         android:layout_width="match_parent"
         android:layout_height="@dimen/separate_line_height"
+        android:layout_below="@id/card_non_player_part"
         android:background="@color/separate_line_background"/>
 </RelativeLayout>

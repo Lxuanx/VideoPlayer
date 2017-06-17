@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Lxuanx 播放器</string>
+    <string name="app_name">光影影音</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -19,4 +19,7 @@
     <string name="episode">选集</string>
     <string name="episode_more">更新至%1$s集/共%2$s集></string>
     <string name="episode_more_finished">共%1$s集全></string>
+    <string name="play_loading">正在玩命加载中 &#8230;</string>
+    <string name="splash_word">光影片刻体会多彩人生 &#8230;</string>
+    <string name="about"> Copyright @ Lxuanx &amp; Ls</string>
 </resources>
